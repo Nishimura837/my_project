@@ -42,15 +42,17 @@ print(df1.iloc[:,2])
 
 #モデル（決定木）を作成
 from sklearn import tree
-clf = tree.DecisionTreeClassifier(max_depth=3)
+#モデルを定義
+clf = tree.DecisionTreeClassifier(max_depth=2)
+#モデルの学習
 clf = clf.fit(df1_train.iloc[:,0:1], df1_train.iloc[:,2])
 
-#作成したモデル木の可視化
-import matplotlib.pyplot as plt 
-from sklearn.tree import plot_tree
-plt.figure(figsize=(15,10))
-plot_tree(clf, feature_names=df1_train.target, filled=True)
-plt.show()
+# #作成したモデル木の可視化
+# import matplotlib.pyplot as plt 
+# from sklearn.tree import plot_tree
+# plt.figure(figsize=(15,10))
+# plot_tree(clf, feature_names=df1_train.target, filled=True)
+# plt.show()
 
 #作成したモデル（決定木）をもちいて予測を実行
 predicted = clf.predict(df1_test.iloc[:,0:1])
@@ -59,19 +61,26 @@ print(predicted)
 #識別率の確認
 print(sum(predicted == df1_test.target)/len(df1_test.target))
 
-# #これまで使ってきたデータフレームをnumpyに変換する
-# import numpy as np 
-# X_df1 = df1.iloc[:,0].to_numpy()
-# y_df1 = df1.iloc[:,1].to_numpy()
-# z_df1 = df1.iloc[:,2].to_numpy()
-# print("df1 to numpy")
-# print(X_df1)
-# print(y_df1)
-# print(z_df1)
+#これまで使ってきたデータフレームをnumpyに変換する
+import numpy as np 
+f_df1 = df1.values
+#print(f_df1.dtype)
+#整数型に変換
+i_df1 = f_df1.astype(int)
+#print(i_df1.dtype)
+
 
 #決定境界を可視化する
-from seaborn_analyzer import classplot
-classplot.class_separator_plot(clf, ['petal length (cm)','petal width (cm)'],'target',df1)
+from mlxtend.plotting import plot_decision_regions
+from xgboost import XGBClassifier
+
+X, y = f_df1[:,[0,1]], i_df1[:,2]
+clf = XGBClassifier().fit(X, y) 
+
+plot_decision_regions(X, y, clf=clf, legend=2)
+plt.show()
+
+#違う決定境界が作られて可視化されている
 
 
 
