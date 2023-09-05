@@ -72,5 +72,5 @@ axes[1].set_ylabel("petal width(cm)")
 axes[1].legend(loc='lower right')
 
 plt.tight_layout()
-plt.show()
-plt.savefig("/home/gakubu/デスクトップ/python_git/my_project/ML_8/k_means.pdf", format='pdf')       #出力したグラフをiris.pdfという名前で保存する
+# plt.show()
+plt.savefig("/home/gakubu/デスクトップ/python_git/my_project/ML_8/k_means.pdf", format='pdf')       #出力したグラフをk_means.pdfという名前で保存する

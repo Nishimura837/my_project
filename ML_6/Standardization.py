@@ -110,7 +110,7 @@ fwt_train, fwt_test = train_test_split(fwt,test_size=0.3,random_state=42)
 
 #モデル（決定木）を作成
 #モデルを定義
-clf = tree.DecisionTreeClassifier(max_depth=10)
+clf = tree.DecisionTreeClassifier(max_depth=3)
 #モデルの学習
 clf.fit(fwt[:,0:2], fwt[:,2])
 
@@ -153,5 +153,5 @@ patch1 = mpatches.Patch(color='r', label='setosa')
 patch2 = mpatches.Patch(color='g', label='versicolor')
 patch3 = mpatches.Patch(color='b', label='virginica')
 plt.legend(handles=[patch1,patch2,patch3],loc='upper right')
-#plt.savefig('Standard_PCA.pdf', format='pdf')       #出力したグラフをiris.pdfという名前で保存する
+plt.savefig('Standard_PCA.pdf', format='pdf')       #出力したグラフをiris.pdfという名前で保存する
 plt.show()
