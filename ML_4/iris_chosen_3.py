@@ -15,14 +15,14 @@ df1=df_iris.drop(columns=['sepal length (cm)', 'sepal width (cm)'])
 
 #トレーニングデータとテストデータに分類する
 from sklearn.model_selection import train_test_split
-df1_train, df1_test = train_test_split(df1,test_size=0.3,random_state=42) \
+df1_train, df1_test = train_test_split(df1,test_size=0.3,random_state=42) 
     #train_test_split(namelist, test_size=0.3)ここでは30%がテストデータ,random_stateはシード値
 
 
 #モデル（決定木）を作成
 from sklearn import tree
 #モデルを定義
-clf = tree.DecisionTreeClassifier(max_depth=10)
+clf = tree.DecisionTreeClassifier(max_depth=3)
 #モデルの学習
 clf.fit(df1_train.iloc[:,0:2], df1_train.iloc[:,2])
 
