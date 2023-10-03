@@ -51,7 +51,7 @@ plt.show()
 
 #元データの図示
 d= df1.iloc
-plt.scatter(d[0:50, 0], d[:50, 1], color='r', marker='s', edgecolor='black', label='setosa')
+plt.scatter(d[:50, 0], d[:50, 1], color='r', marker='s', edgecolor='black', label='setosa')
 plt.scatter(d[50:100, 0], d[50:100, 1], color='g', marker='^', edgecolor='black', label='versicolor')
 plt.scatter(d[100:, 0], d[100:, 1], color='b', marker='o', edgecolor='black', label='virginica')
 plt.grid(color='grey', linestyle=':', linewidth=0.3)
