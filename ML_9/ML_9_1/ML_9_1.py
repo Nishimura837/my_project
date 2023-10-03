@@ -72,5 +72,3 @@ condition1 = X['case_name'].str.contains('office10')
 df_test = X[condition1]
 condition2 = ~X['case_name'].str.contains('office10')
 df_train = X[condition2]
-print(df_test)
-print(df_train)
