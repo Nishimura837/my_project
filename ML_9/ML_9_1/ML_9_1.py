@@ -3,11 +3,11 @@ import pandas as pd
 import matplotlib.pyplot as plt 
 import seaborn as sns
 
-#csvファイルをpandasを使って読み込む
-#csvファイルが保存されているルートディレクトリのパス
+    #csvファイルをpandasを使って読み込む
+    #csvファイルが保存されているルートディレクトリのパス
 root_directory = "/home/gakubu/デスクトップ/python_git/my_project/ML_9/"
-#各officeのinputdataをデータフレームとして読み込む
-#フォルダごとに処理を繰り返す
+    #各officeのinputdataをデータフレームとして読み込む
+    #フォルダごとに処理を繰り返す
 for folder_name in os.listdir(root_directory):
     folder_path = os.path.join(root_directory, folder_name)
     csv_file_path = os.path.join(folder_path, "inputdata.csv")  #各フォルダ内のinputdata.csvファイルのパス
@@ -23,16 +23,16 @@ for folder_name in os.listdir(root_directory):
         globals()[df_name].loc[globals()[df_name]['exhaust'] == "b", 'exhaust'] = 1
         globals()[df_name].loc[globals()[df_name]['exhaust'] == "off", 'exhaust'] = 2
 
-#作成されたすべてのデータフレームの名前を取得
+    #作成されたすべてのデータフレームの名前を取得
 df_names = [var_name for var_name in globals() if isinstance(globals()[var_name], pd.DataFrame)]
 
-#countfrom2secpatientAverage.csvをデータフレームとして読み込む
+    #countfrom2secpatientAverage.csvをデータフレームとして読み込む
 df_count_from2sec = pd.read_csv("/home/gakubu/デスクトップ/python_git/my_project/ML_9/"\
                                 "count_from2sec_patientAverage.csv", header=0)
 dfc = df_count_from2sec
-##ここまでで必要なデータはすべて読み込み済み
+    ##ここまでで必要なデータはすべて読み込み済み
 
-# casename,case_name列をキーにしてinputdataとdfcのRoI列を結合
+    # casename,case_name列をキーにしてinputdataとdfcのRoI列を結合
 for name in df_names:
     df_name = f"R_{name}"   #データフレーム名をフォルダ名に基づいて作成
     # 名前を使用してデータフレームにアクセス
@@ -42,10 +42,10 @@ for name in df_names:
     # print(globals()[df_name])
     print(globals()[df_name].shape)
 
-#作成されたすべてのデータフレームの名前を取得
+    #作成されたすべてのデータフレームの名前を取得
 df_names = [var_name for var_name in globals() if isinstance(globals()[var_name], pd.DataFrame)]
 
-# 'dfR' を含むデータフレームの名前を格納するリストを初期化
+    # 'R' を含むデータフレームの名前を格納するリストを初期化
 R_names = []
 for variable_name in df_names:
     if 'R' in variable_name:
@@ -53,22 +53,28 @@ for variable_name in df_names:
 
 print(R_names)
 
-# 空のリストを作成してデータフレームを格納
+    # 空のリストを作成してデータフレームを格納
 df_list = []
 
-# データフレームをリストに追加
+    # データフレームをリストに追加
 for df_name in R_names:
     df = globals()[df_name]  # データフレーム名からデータフレームを取得
     df_list.append(df)
 
-df_concat =  pd.concat(df_list, axis=0, ignore_index=True)
+X =  pd.concat(df_list, axis=0, ignore_index=True)
 
-X = df_concat
-print(X)
-
-##トレーニングデータとテストデータに分割する（office10をテストデータ、他はトレーニングデータ）
-#casenameにoffice10を含む行を抽出
+    ##トレーニングデータとテストデータに分割する（office10をテストデータ、他はトレーニングデータ）
+    #casenameにoffice10を含む行を抽出
 condition1 = X['case_name'].str.contains('office10')
 df_test = X[condition1]
 condition2 = ~X['case_name'].str.contains('office10')
 df_train = X[condition2]
+print(df_test)
+print(df_train)
+    #-----------------トレーニングデータテストデータに分割完了-----------------------------
+
+    #ここから課題の線形重回帰分析に入っていく
+    
+
+
+
