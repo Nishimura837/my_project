@@ -16,7 +16,7 @@ print(df1)
 #教師なし学習のk-meansを使ってクラスタリングを行う
 X = df1.iloc[:,:2]
 print(X)
-Y = df1.iloc[:,2]
+
 
 kmeans = KMeans(n_clusters=3, init='random', n_init='auto', random_state=42)
 y_kmeans = kmeans.fit_predict(X)
