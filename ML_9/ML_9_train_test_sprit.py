@@ -19,6 +19,12 @@ for folder_name in os.listdir(root_directory):
         globals()[df_name].loc[globals()[df_name]['exhaust'] == "b", 'exhaust'] = 1
         globals()[df_name].loc[globals()[df_name]['exhaust'] == "off", 'exhaust'] = 2
 
+        #'aircon_position_x', 'aircon_position_y'の列があった場合にその列を削除する
+        #今回は片方があればどちらも存在するから片方の条件で両方削除する
+        if 'aircon_position_x' in globals()[df_name].columns :
+            globals()[df_name] = globals()[df_name].drop(columns=['aircon_position_x', 'aircon_position_y'])
+
+
     #作成されたすべてのデータフレームの名前を取得
 df_names = [var_name for var_name in globals() if isinstance(globals()[var_name], pd.DataFrame)]
     #countfrom2secpatientAverage.csvをデータフレームとして読み込む

@@ -16,12 +16,19 @@ for folder_name in os.listdir(root_directory):
 
         #csvファイルをデータフレームとして読み込む
         globals()[df_name] = pd.read_csv(csv_file_path)
+        
 
         #カテゴリ変数である"exhaust"を[Label Encoding]により数値化する
         #"exhaust"の値に応じて、"a"なら"0"、"b"なら1、"off"なら"2"に変換する
         globals()[df_name].loc[globals()[df_name]['exhaust'] == "a", 'exhaust'] = 0
         globals()[df_name].loc[globals()[df_name]['exhaust'] == "b", 'exhaust'] = 1
         globals()[df_name].loc[globals()[df_name]['exhaust'] == "off", 'exhaust'] = 2
+
+        #'aircon_position_x', 'aircon_position_y'の列があった場合にその列を削除する
+        #今回は片方があればどちらも存在するから片方の条件で両方削除する
+        if 'aircon_position_x' in globals()[df_name].columns :
+            globals()[df_name] = globals()[df_name].drop(columns=['aircon_position_x', 'aircon_position_y'])
+
 
         print(df_name)
         print(globals()[df_name])
@@ -133,7 +140,7 @@ df_list = []
 for df_name in dfR_names:
     df = globals()[df_name]  # データフレーム名からデータフレームを取得
     df_list.append(df)
-
+# データフレームの結合
 df_concat =  pd.concat(df_list, axis=0, ignore_index=True)
 
 X = df_concat.drop(columns=['case_name','office_name','office_num'])
