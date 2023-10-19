@@ -104,7 +104,7 @@ df_forfig.plot.scatter(x='predict values', y='residuals', c=df_forfig['legend_nu
 #     patchnum = mpatches.Patch(color=color, label=legend)
 #     legend_list.append(patchnum)
 
-# plt.legend(legend_list)
+plt.legend(zip(legend_names, colors))
 
 
 plt.title('Error Evaluation')
