@@ -30,14 +30,14 @@ for folder_name in os.listdir(root_directory):
             globals()[df_name] = globals()[df_name].drop(columns=['aircon_position_x', 'aircon_position_y'])
 
 
-        print(df_name)
-        print(globals()[df_name])
+        # print(df_name)
+        # print(globals()[df_name])
 
 #作成されたすべてのデータフレームの名前を取得
 df_names = [var_name for var_name in globals() if isinstance(globals()[var_name], pd.DataFrame)]
-#データフレームの名前を表示
-for name in df_names:
-    print(name)
+# #データフレームの名前を表示
+# for name in df_names:
+#     print(name)
 
 
 #countfrom2secpatientAverage.csvをデータフレームとして読み込む
@@ -68,7 +68,7 @@ for folder_name in os.listdir(root_directory):
         if folder_name in row['casename']:                  #casenameに'folder_nameが含まれているかどうか
             dfc.at[index, 'office_name'] = folder_name
 
-print(dfc)
+# print(dfc)
 
 # 各オフィス名に対する色を 'tab20' カラーマップから取得
 office_names = dfc['office_name'].unique()      #unique()メソッドは指定した列内の一意の値の配列を返す（重複を取り除く）
@@ -98,7 +98,7 @@ for name in df_names:
     globals()[df_name] = pd.merge(name, dfc, left_on='case_name', right_on='casename', how='left')
     globals()[df_name] = globals()[df_name].drop(columns=['casename'])
     # print(globals()[df_name])
-    print(globals()[df_name].shape)
+    # print(globals()[df_name].shape)
 
 #作成されたすべてのデータフレームの名前を取得
 df_names = [var_name for var_name in globals() if isinstance(globals()[var_name], pd.DataFrame)]
@@ -110,7 +110,7 @@ for variable_name in df_names:
     if 'dfR' in variable_name:
         dfR_names.append(variable_name)
 
-print(dfR_names)
+# print(dfR_names)
 
 # ##説明変数と目的変数の相関関係を探ってヒートマップを作成する
 # for office in dfR_names :
@@ -144,7 +144,7 @@ for df_name in dfR_names:
 df_concat =  pd.concat(df_list, axis=0, ignore_index=True)
 
 X = df_concat.drop(columns=['case_name','office_name','office_num'])
-print(X)
+# print(X)
 # 相関行列を計算
 correlation_matrix = X.corr()
 # ヒートマップを作成
@@ -162,11 +162,5 @@ condition1 = df_concat['case_name'].str.contains('office10')
 df_test = df_concat[condition1]
 condition2 = ~df_concat['case_name'].str.contains('office10')
 df_train = df_concat[condition2]
-print(df_test)
-print(df_train)
-
-
-
-
-
-
+# print(df_test)
+# print(df_train)

@@ -1,0 +1,21 @@
+#図の作成
+# 各オフィス名に対する色を 'tab20' カラーマップから取得
+legend_names = df_forfig['legend'].unique()      #unique()メソッドは指定した列内の一意の値の配列を返す（重複を取り除く）
+colors = plt.cm.tab20(range(len(legend_names))) #tab20から配列office_namesの長さ分の色の配列colorsを返す
+# オフィス名と色の対応を辞書に格納
+# zip関数は２つ以上のリストを取り、それらの対応する要素をペアにしてイテレータを返す。
+#この場合、legend_namesとcolorsの２つのリストをペアにし、対応する要素同士を取得する。
+# =以降はofficeをキーとしてそれに対応するcolorが"値"として格納される辞書を作成
+legend_color_mapping = {legend: color for legend, color in zip(legend_names, colors)}
+# 'legend' 列を数値（色情報に対応する数値）に変換
+# 'legend_num'　を追加
+df_forfig['legend_num'] = df_forfig['legend'].map(legend_color_mapping)
+df_forfig.plot.scatter(x='predict values', y='residuals', c=df_forfig['legend_num'])
+
+# #カスタム凡例テキストを使用
+# legend_list = []
+# for  color, legend in legend_color_mapping :
+#     patchnum = mpatches.Patch(color=color, label=legend)
+#     legend_list.append(patchnum)
+
+# plt.legend(legend_list)
