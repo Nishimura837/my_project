@@ -12,8 +12,8 @@ from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
 
 #df_test.csv,df_train.csvを取得
-df_test_path = "/home/gakubu/デスクトップ/ML_git/MLT/ML_9/df_test.csv"
-df_train_path = "/home/gakubu/デスクトップ/ML_git/MLT/ML_9/df_train.csv"
+df_test_path = "/home/gakubu/デスクトップ/python_git/my_project/ML_9/df_test.csv"
+df_train_path = "/home/gakubu/デスクトップ/python_git/my_project/df_train.csv"
 df_test = pd.read_csv(df_test_path)
 df_train = pd.read_csv(df_train_path)
 
